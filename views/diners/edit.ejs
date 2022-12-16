@@ -1,0 +1,52 @@
+<% layout('/layouts/boilerplate') %>
+<div class="row">
+    <h1 class="text-center">Edit Diner</h1>
+</div class="col-6 offset-3">
+    <form action="/diners/<%=diner._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <div class="mb-3">
+            <label class="form-label" for="title">Name</label>
+            <input class="form-control" type="text" id="title" name="diner[title]" value="<%=diner.title %>" required>
+            <div class="valid-feedback">
+                valid input!
+            </div>
+        </div>
+        <div>
+            <label class="form-label" for="location">Location</label>
+            <input class="form-control" type="text" id="location" name="diner[location]" value="<%= diner.location%>" required>
+            <div class="valid-feedback">
+                valid input!
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="price">Food Price</label>
+            <div class="input-group">
+                <span class="input-group-text" id="price-label">$</span>
+                <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                    aria-describedby="price-label" name="diner[price]" value="<%=diner.price %>"
+                    required>\<div class="valid-feedback">
+                    valid input!
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="image">Image Url</label>
+            <input class="form-control" type="text" id="image" name="diner[image]"
+                value="<%=diner.image %>" required>
+                <div class="valid-feedback">
+                    valid input!
+                </div>
+            </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="description"> Food description</label>
+            <textarea class="form-control" type="text" id="description"
+                name="diner[description]" required><%= diner.description%></textarea>
+                <div class="valid-feedback">
+                    valid input!
+                </div>
+            </div>
+        <div class="mb-3">
+        <button class="btn btn-warning">Update Diner</button>
+    </div>
+    </form>
+    <a href="/diners/<%= diner._id%>">Back To Diner</a>

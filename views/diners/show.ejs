@@ -1,0 +1,55 @@
+<% layout('/layouts/boilerplate') %>
+
+<div>
+    <h1><%= diner.title%></h1>
+    <h2><%= diner.location%>, Dublin</h2>
+    <li class="list-group-item">Average meal price/visit: $<%= diner.price%></li>
+    <li class="list-group-item">Entered by: <%= diner.author.username%></li>
+    <img src="<%= diner.image %>" alt="">
+    <% if (signedinUser && diner.author.equals(signedinUser._id)) {%> 
+    <p> <%= diner.description %></p>
+    <button>        
+        <a href="/diners/<%=diner._id%>/edit">Edit</a>
+    </button>
+    <p>
+        <form action="/diners/<%= diner._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-warning">Delete</button>
+        </form>
+        </p>
+    </p>
+    <% } %>
+</div>
+<% if (signedinUser) {%> 
+<form action="/diners/<%=diner._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+    <div class="mb-3">
+        <label class="form-label"for="reviewbody">Leave a review</label>
+        <textarea class="form-control" name="review[body]" id="reviewbody" cols="30" rows="4" required></textarea>
+        <div class="valid-feedback">
+            Valid input!
+        </div>
+    </div>
+    <button class="btn btn-primary">Add Review</button>
+</form>
+<% } %> 
+<h4>Reviews</h4>
+<% for (let review of diner.reviews) { %> 
+    <div class="card mb-3">
+    <div class="card-body">
+        <p><%= review.body %> </p>
+  
+        <h6 class="card-subtitle mb-2 text-muted">Review Posted by: <%= review.author.username %> </h6>
+
+        <% if (signedinUser && review.author.equals(signedinUser._id)) {%> 
+
+        <form action="/diners/<%=diner._id%>/reviews/<%=review ._id%>?_method=DELETE" method="POST">
+        <button class = "btn-sm btn-danger">Delete</button>
+        </form>
+         <% } %> 
+    </div>
+</div>
+        <% } %> 
+    
+
+    
+
+    

@@ -1,0 +1,26 @@
+<% layout('/layouts/boilerplate') %>
+            <h1>All Diners</h1>
+        <div>
+            <a href="/diners/new">Add New Diner</a>
+        </div>
+        <ul>
+            <% for (let diner of diners) {%>
+                <div class="card" mb-3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-fluid" alt="" src="<%=diner.image%>">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= diner.title %> </h5>
+                                <p class="card-text"><%= diner.description %></p>
+                                <p class="card-text">
+                                    <small class="text-muted">Location: <%= diner.location%></small>
+                                </p>
+                                <a class="btn btn-primary" href="/diners/<%=diner._id%>">View <%=diner.title%></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+    
